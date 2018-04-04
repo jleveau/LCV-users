@@ -1,0 +1,42 @@
+{
+  "name": "LCV-users",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "SET NODE_ENV=dev&& node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jleveau/LCV-users.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jleveau/LCV-users/issues"
+  },
+  "homepage": "https://github.com/jleveau/LCV-users#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "config": "^1.30.0",
+    "express": "^4.16.2",
+    "fs-readdir-recursive": "^1.1.0",
+    "mongoose": "^5.0.9",
+    "morgan": "^1.9.0",
+    "node-oauth2-server": "^2.4.0",
+    "request": "^2.83.0",
+    "winston": "^3.0.0-rc1"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.7.3",
+    "chai": "^4.1.2",
+    "eslint": "^4.19.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.0.2"
+  }
+}
