@@ -3,7 +3,7 @@ class TestHttpSender {
     static createPost (url, body) {
         return new Promise((resolve, reject) => {
             request({
-                url: "http://localhost:3000" + url,
+                url: "http://localhost:3002" + url,
                 method: "POST",
                 json: body
             }, (error, response, body) => {
@@ -19,7 +19,7 @@ class TestHttpSender {
     static createPut (url, body) {
         return new Promise((resolve, reject) => {
             request({
-                url: "http://localhost:3000" + url,
+                url: "http://localhost:3002" + url,
                 method: "PUT",
                 json: body
             }, (error, response, body) => {
@@ -35,7 +35,7 @@ class TestHttpSender {
     static createGet (url) {
         return new Promise((resolve, reject) => {
             request({
-                url: "http://localhost:3000" + url,
+                url: "http://localhost:3002" + url,
                 method: "GET"
             }, (error, response, body) => {
                 if (!error && response.statusCode === 200) {

@@ -5,8 +5,6 @@ const logger = require("./logger")
 
 const users = require("./routes/user")
 const morgan = require("morgan")
-const oAuth2Server = require("node-oauth2-server")
-const model = require("./model/auth")
 
 // Database connection
 const config = require("config")
@@ -36,7 +34,7 @@ db.on("error", console.error.bind(console, "connection error:"))
 // Initialize our app variable
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan("dev"))
 
 app.use(function (req, res, next) {
@@ -47,14 +45,8 @@ app.use(function (req, res, next) {
 })
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-app.oauth = oAuth2Server({
-    model
-})
 
 app.use("/api/user", users)
-app.use(app.oauth.errorHandler())
 
 app.listen(port, () => {
     console.log("listening on port " + port)

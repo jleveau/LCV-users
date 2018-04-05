@@ -1,7 +1,17 @@
 const mongoose = require("mongoose")
 
-const schema = new mongoose.Schema({
-    username: { type: String, required: true }
-})
+const Token = mongoose.model("OAuthTokens", new mongoose.Schema({
+    accessToken: { type: String },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+}))
 
-module.exports = mongoose.model("User", schema)
+const User = mongoose.model("User", new mongoose.Schema({
+    email: { type: String, default: "" },
+    password: { type: String },
+    username: { type: String }
+}))
+
+module.exports = {
+    Token,
+    User
+}
