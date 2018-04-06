@@ -21,6 +21,7 @@
     "body-parser": "^1.18.2",
     "co-views": "^2.1.0",
     "config": "^1.30.0",
+    "crypto": "^1.0.1",
     "express": "^4.16.2",
     "fs-readdir-recursive": "^1.1.0",
     "mongoose": "^5.0.9",

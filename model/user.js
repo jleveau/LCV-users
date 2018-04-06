@@ -3,17 +3,19 @@ const UserModel = require("./schema").User
 const TokenModel = require("./schema").Token
 const logger = require("../logger")
 const uuidv4 = require("uuid/v4")
+const Encrypt = require("../encrypt/encrypt")
 
 class UserController {
     register (user) {
         return new Promise((resolve, reject) => {
             const username = user.username
-            const password = user.password
+            let password = user.password
             // validate the request
 
             if (!username || !password) {
                 return reject(new Error("Invalid Credentials"))
             }
+            password = Encrypt.encrypt(user.password)
             UserModel.count({username})
                 .then((count) => {
                     if (count > 0) {
@@ -48,7 +50,7 @@ class UserController {
                     if (!userFound) {
                         return reject(new Error("Not registered, or wrong password / username combination"))
                     }
-                    if (password !== userFound.password) {
+                    if (password !== Encrypt.decript(userFound.password)) {
                         return reject(new Error("Not registered, or wrong password / username combination"))
                     }
 

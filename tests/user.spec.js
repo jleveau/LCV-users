@@ -28,13 +28,14 @@ describe("API", () => {
                     expect(response.status).to.be.eql(200)
                     expect(response.message).be.eql("Registration was successful")
                     return UserSchema.findOne({
-                        username: "toto",
-                        password: "my_password"
+                        username: "toto"
                     })
                 })
                 .then((usercreated) => {
                     expect(usercreated.username).to.be.eql(user.username)
-                    expect(usercreated.password).to.be.eql(user.password)
+                    expect(usercreated.password).to.not.be.eql(user.password)
+                    expect(usercreated.password).to.not.be.eql(null)
+
                     done()
                 })
                 .catch((error) => done(error))
