@@ -13,13 +13,13 @@ class UserController {
             // validate the request
 
             if (!username || !password) {
-                return reject(new Error("Invalid Credentials"))
+                return reject(new Error("Identifiants invalides"))
             }
             password = Encrypt.encrypt(user.password)
             UserModel.count({username})
                 .then((count) => {
                     if (count > 0) {
-                        return reject(new Error("User already exists"))
+                        return reject(new Error("L'utilisateur existe déjà"))
                     }
                     const user = new UserModel({
                         username,
@@ -28,11 +28,11 @@ class UserController {
                     return user.save()
                 })
                 .then((user) => {
-                    return resolve("Registration was successful")
+                    return resolve("Inscription réussie")
                 })
                 .catch((error) => {
                     logger.error(error)
-                    reject(new Error("Failed to register"))
+                    reject(new Error("Erreur lors de l'inscription"))
                 })
         })
     }
@@ -43,15 +43,15 @@ class UserController {
             const password = auth.password
             let user = null
             if ((!username || !password)) {
-                return reject(new Error("Invalid Credentials"))
+                return reject(new Error("Identifiants invalides"))
             }
             UserModel.findOne({username})
                 .then((userFound) => {
                     if (!userFound) {
-                        return reject(new Error("Not registered, or wrong password / username combination"))
+                        return reject(new Error("L'utilisateur n'est pas inscrit, ou mauvaise combinaison de nom d'utiliteur / mot de passe"))
                     }
                     if (password !== Encrypt.decript(userFound.password)) {
-                        return reject(new Error("Not registered, or wrong password / username combination"))
+                        return reject(new Error("L'utilisateur n'est pas inscrit, ou mauvaise combinaison de nom d'utiliteur / mot de passe"))
                     }
 
                     const token = new TokenModel({
@@ -69,7 +69,7 @@ class UserController {
                 })
                 .catch((error) => {
                     logger.error(error)
-                    return reject(new Error("failed during login"))
+                    return reject(new Error("Erreur lors de l'authentification"))
                 })
         })
     }
@@ -79,7 +79,7 @@ class UserController {
             UserModel.findOne(user)
                 .then((userFound) => {
                     if (!userFound) {
-                        reject(new Error("user does not exists"))
+                        reject(new Error("L'utilisateur n'existe pas"))
                     }
                     return TokenModel.find({
                         user: userFound
@@ -88,10 +88,10 @@ class UserController {
                 .then((userTokens) => {
                     userTokens.forEach((userToken) => {
                         if (userToken && userToken.accessToken === token) {
-                            resolve("granted")
+                            resolve("Permission accordée")
                         }
                     })
-                    reject(new Error("permission denied"))
+                    reject(new Error("Permission refusée"))
                 })
         })
     }

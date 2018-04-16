@@ -26,7 +26,7 @@ describe("API", () => {
             })
                 .then((response) => {
                     expect(response.status).to.be.eql(200)
-                    expect(response.message).be.eql("Registration was successful")
+                    expect(response.message).be.eql("Inscription réussie")
                     return UserSchema.findOne({
                         username: "toto"
                     })
@@ -53,7 +53,7 @@ describe("API", () => {
                     done("should have failed")
                 })
                 .catch((error) => {
-                    expect(error).to.be.eql("Invalid Credentials")
+                    expect(error).to.be.eql("Identifiants invalides")
                     UserSchema.findOne({user}).then((usercreated) => {
                         expect(usercreated).to.be.eql(null)
                         done()
@@ -110,7 +110,7 @@ describe("API", () => {
                 .catch((error) => {
                     const token = error.accessToken
                     expect(token).to.eql(undefined)
-                    expect(error).to.eql("Not registered, or wrong password / username combination")
+                    expect(error).to.eql("L'utilisateur n'est pas inscrit, ou mauvaise combinaison de nom d'utiliteur / mot de passe")
                     done()
                 })
         })
@@ -149,7 +149,7 @@ describe("API", () => {
             })
                 .then((response) => {
                     expect(response.status).to.be.eql(200)
-                    expect(response.message).to.be.eql("granted")
+                    expect(response.message).to.be.eql("Permission accordée")
                     done()
                 })
         })
@@ -162,7 +162,7 @@ describe("API", () => {
                 .then((response) => {
                     done("should have failed")
                 }).catch((error) => {
-                    expect(error).to.be.eql("permission denied")
+                    expect(error).to.be.eql("Permission refusée")
                     done()
                 })
         })
