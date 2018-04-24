@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json())
 
-app.use("/api/user", users)
+app.use("/api/users", users)
 
 app.listen(port, () => {
     console.log("listening on port " + port)

@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "SET NODE_ENV=dev&& node app",
-    "test": "mocha tests --exit --recursive --timeout 10000"
+    "test": "mocha tests --exit --recursive --timeout 10000",
+    "start-prod": "export NODE_ENV=prod && node app",
+    "docker" : "docker  build -t oursgroumy/lcv-users . && docker push oursgroumy/lcv-users"
   },
   "repository": {
     "type": "git",
